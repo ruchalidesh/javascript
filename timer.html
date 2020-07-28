@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+      
+          <select id="lang" onchange="select()">
+          <option value="aug">Aurangabad</option>
+          <option value="beed">Beed</option>
+          <option value="pune">Pune</option>
+          <option value="mumbai">Mumbai</option>
+        </select>
+        Select City:<span id="selectc"></span>
+
+        <br>
+        <br>
+        <br>
+        <button ondblclick="double()">double click</button>
+        <br>
+        <br>
+        <br>
+        <input type="text" onkeypress="press()">
+        <input type="text" onkeydown="keydown()">
+        <input type="text" onkeyup="keyup()">
+<br><br>
+<span id='this'></span>
+<button onclick="countone()"><b>Count</b></button>
+<br><br><br>
+<h1 id="time"></h1>
+<br>
+<br>
+<h1 id="counter">50</h1>
+       <script>
+            function select()
+           {
+               var x= document.getElementById("lang").value;
+               document.getElementById("selectc").innerHTML=x;
+           }
+           function double()
+           {
+               alert("double click");           
+            }
+            function press()
+            {
+                alert("onpress");
+            }
+            function keydown()
+            {
+                alert("onkeydown");
+            }
+
+            function keyup()
+            {
+                alert("onkeyup");
+            }
+            function countone()
+            {
+                var p= document.getElementById('this').innerHTML;
+                p++;
+                document.getElementById('this').innerHTML=p;
+            }
+            setInterval(
+                function()
+                {
+                    document.getElementById("time").innerHTML=Date();
+                }
+            ,1);
+            var count=50;
+           setInterval(
+               function()
+               {
+                count--;
+                       if(count >=0){
+                      
+                      document.getElementById("counter").innerHTML=count;
+                      
+                   }
+                   
+               },1000);
+    
+
+
+
+       </script>
+  </body>
+  </html>

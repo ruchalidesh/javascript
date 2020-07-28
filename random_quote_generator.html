@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Quote Generator</title>
+
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: helvetica;
+    font-size: 18px;
+    /* background-color: #b3ffab; */
+
+  }
+
+  .container {
+    margin: 100px auto;
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quote-box {
+    border: 2px solid #ddd;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 10px lightsteelblue;
+    background-color: lightslategray;
+    width: auto;
+    height: auto;
+  }
+
+  #quote {
+    color: white;
+    text-align: center;
+    font-family: 'Piedra', cursive;
+  }
+
+  #author {
+    float: right;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 10px;
+  }
+
+  .btn-gradient {
+
+    background: #4776E6;
+
+    background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);
+
+    background: linear-gradient(to right, #8E54E9, #4776E6);
+
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 3px slategray;
+    height: 40px;
+
+  }
+
+  #btn {
+    align-self: center;
+    border: 2px solid #666;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: bold;
+    cursor: pointer;
+    height: 100px;
+  }
+
+  #btn:focus {
+    outline: none;
+  }
+
+  .demoFont {
+
+    font-weight: 900;
+    padding-left: 100px;
+  }
+</style>
+
+<body>
+
+  <div class="container">
+    <p class="text-center demoFont text-secondary">Quote Generator</p>
+    <br>
+    <div class="quote-box">
+      <p id="quote">"Quote goes here..."</p>
+
+      <small class="text-center demoFont text-secondary" id="author"> -Author</small>
+    </div>
+    <button class="btn btn-gradient btn-sm mb-4" onclick="randomQuote()">Press for a new Quote!</button><br>
+    <!-- <button id="btn" onclick=" randomQuote()">New Quote</button> -->
+  </div>
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script>
+
+    var quoteArray = []
+
+    // randomQuote();
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      randomQuote()
+
+    })
+    function randomQuote() {
+
+      clearOldQuote();
+
+      // document.getElementById("loading").style.display = 'block';
+
+      fetch('https://api.quotable.io/random')
+
+        .then(response => response.json())
+
+        .then(data => {
+
+          console.log(data)
+
+          quoteArray = data
+
+          //document.getElementById("loading").style.display = 'none';
+
+          document.getElementById('quote').innerHTML = quoteArray.content
+
+          document.getElementById('author').innerHTML = quoteArray.author
+        })
+
+    }
+
+    function clearOldQuote() {
+
+      document.getElementById('quote').innerHTML = ''
+
+      document.getElementById('author').innerHTML = ''
+
+
+    }
+
+    // fetch("https://api.quotable.io/random")
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log(data);
+    //     document.getElementById('quote').innerHTML = data.quote;
+    //     document.getElementById('author').innerHTML = data.author;
+
+    //   })
+
+
+  </script>
+
+
+</body>
+
+</html>

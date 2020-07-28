@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>example</title>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .h5 {
+      text-align: center;
+    }
+
+    .container {
+
+      height: 300px;
+      width: 600px;
+      text-align: center;
+      margin-top: 50px;
+      border-radius: 15px;
+      background-color: aliceblue;
+      border-color: 2px solid royalblue;
+      border: 2px solid royalblue;
+
+    }
+
+    .col-md-6 {
+      text-align: center;
+      align-content: center;
+      padding-left: 220px;
+
+    }
+
+    .col-lg-4 {
+      text-align: center;
+      align-content: center;
+      padding-left: 20px;
+      padding-right: 50px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  </div>
+  <div class="container">
+    <h5>Convert Currency </h5>
+    <br>
+    <div class="row">
+      <div class="col-sm-6 ml-5 pl-5 ">
+        <div class=" form-group">
+          <label for="Amount">Amount</label>
+          <input type="number" class="form-control" id="Amount">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col ml-5 w-500">
+          From<select class="form-control" id="fromcurrency">
+
+            <option value="INR">INR</option>
+            <option value="CAD">CAD</option>
+
+            <option value="HKD">HKD</option>
+
+            <option value="ISK">ISK</option>
+
+            <option value="PHP">PHP</option>
+            <option value="CZK">CZK</option>
+
+            <option value="GBP">GBP</option>
+
+            <option value="RON">RON</option>
+
+            <option value="SEK">SEK</option>
+
+            <option value="IDR">IDR</option>
+
+          </select>
+        </div>
+
+      </div>
+      <img style="height:40px;width:40px; margin-left:80px; margin-top:25px;object-fit:cover" src="arrow.jpg">
+
+      <div class="form-group">
+        <div class="col ml-5 w-700">
+          To<select class="form-control" id="tocurrency">
+            <option value="INR">INR</option>
+            <option value="CAD">CAD</option>
+
+            <option value="HKD">HKD</option>
+
+            <option value="ISK">ISK</option>
+
+            <option value="PHP">PHP</option>
+            <option value="CZK">CZK</option>
+
+            <option value="GBP">GBP</option>
+
+            <option value="RON">RON</option>
+
+            <option value="SEK">SEK</option>
+
+            <option value="IDR">IDR</option>
+
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row ">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-info" onclick="convert()">Convert</button>
+        <br>
+        <h4 id="result"></h4>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <p id="result"></p>
+      </div>
+    </div>
+  </div> -->
+
+  <script>
+
+    function convert() {
+
+
+      var fromcurrency = document.getElementById('fromcurrency').value;
+      var tocurrency = document.getElementById('tocurrency').value;
+
+      var amount = document.getElementById('Amount').value;
+
+
+
+
+      fetch('https://api.exchangeratesapi.io/latest?base=' + fromcurrency)
+
+        .then(response =>
+
+          response.json()
+
+        )
+
+        .then(data => {
+
+
+          var rate = data.rates[tocurrency];
+
+          var result = rate * amount;
+
+          document.getElementById('result').innerHTML = tocurrency + '' + result.toFixed(2);
+
+
+        })
+
+    }
+
+
+  </script>
+
+</body>
+
+</html>

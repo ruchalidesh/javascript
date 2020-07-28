@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>form</title>
+  <style>
+      .error{
+          
+          color: red;
+          display: none;
+      }
+  </style>
+  </head>
+  <body>
+      <form  name="myform" action="/" onsubmit="return validationForm()" method="post">
+          <input type="text" id="fname" placeholder="First Name"><span id="f_error"class="error">invalid</span><br>
+          
+          <input type="submit" value="Submit">
+      </form>
+      <script>
+          function validationForm()
+          {
+              var x=document.forms['myform']['fname'].value;
+              if(x = = "")
+              {
+                  document.getElementById('f_error').style.display='inline-block';
+                  return false;
+              }
+          }
+      </script>
+      </body>
+      </html>

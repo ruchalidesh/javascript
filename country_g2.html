@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>Currency Converter</title>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .email_error {
+
+      color: red;
+
+      display: none;
+
+      font-size: 12px;
+
+    }
+
+    .password_error {
+
+      color: red;
+
+      display: none;
+
+      font-size: 12px;
+
+    }
+
+    .contact_error {
+
+      color: red;
+
+      display: none;
+
+      font-size: 12px;
+
+    }
+
+    .card-title {
+
+      color: slateblue;
+
+      font-size: 25px;
+
+      font-weight: bolder;
+
+      text-align: center;
+
+    }
+
+    p {
+
+      font-weight: bolder;
+
+      font-size: 20px;
+
+    }
+
+    body {
+
+      background-color: gainsboro;
+
+
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <div class="card-title">Convert Currency </div>
+
+  <div class="card-body">
+
+
+
+    <div class="form-group">
+
+      <label for="Amount">Amount in INR</label>
+
+
+
+      <input type="number" class="form-control" id="Amount">
+
+      <div class="form-group">
+
+        Select Resultant Currency <select class="form-control" id="CurrencySelect">
+
+
+
+          <option value="USD">USD</option>
+
+          <option value="MXN">Mexico</option>
+
+          <option value="EU">Euros</option>
+
+          <option value="AU">Australian Dollars</option>
+
+        </select>
+
+      </div>
+
+
+
+
+
+      <button type="submit" class="btn btn-primary" onclick="convert()">Convert</button>
+
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="container-fluid">
+
+    <p id="result"> </p>
+
+  </div>
+
+  <script>
+
+    function convert() {
+
+      fetch('https://api.exchangeratesapi.io/latest?base=INR')
+
+
+
+        .then(response =>
+
+          response.json()
+
+
+
+        )
+
+        .then(data => {
+
+
+
+
+
+
+
+
+
+          var amt = document.getElementById('Amount').value;
+
+          var con = document.getElementById('CurrencySelect').value;
+
+          //  if(con=="US")
+
+          //  {
+
+          //    res= '$'+ amt* rates.rates.USD;
+
+          //  }
+
+          //  if(con=="rMEX")
+
+          //  {
+
+          //      res='#'+ amt*rates.rates.MXN;
+
+          //  }
+
+          var rate = data.rates[con];
+
+          var result = rate * amt;
+
+          document.getElementById('result').innerHTML = result.toFixed(2);
+
+
+
+        })
+
+    }
+
+  </script>
+
+</body>
+
+</html>

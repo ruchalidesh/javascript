@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .error {
+
+            color: red;
+            display: none;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 40%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form name="myform" action="/" onsubmit="return validateForm()" method="post">
+            <label for="First Name">First Name</label><br>
+            <input type="text" id="fname" placeholder="Enter First Name"><span id="f_error"
+                class="error">invalid</span><br>
+
+            <label for="Last Name">Last Name</label><br>
+            <input type="text" id="lname" placeholder="Enter Last Name"><span id="l_error"
+                class="error">Enterlastname</span><br>
+
+
+            <label for="Email">Email</label><br>
+            <input type="text" id="email" placeholder="Enter Email"><span id="email_error" class="error">incorrect
+                email</span><br>
+
+
+            <label for="city name">City</label><br>
+            <select id="city" onchange="select()" placeholder="select city">
+                <option>Select City</option>
+                <option value="aug">Aurangabad</option>
+                <option value="beed">Beed</option>
+                <option value="pune">Pune</option>
+                <option value="mumbai">Mumbai</option>
+            </select><span id="c_error" class="error">enter city</span><br>
+
+
+            <label for="Contact Number">Contact Number</label><br>
+            <input type="number" id="contact" placeholder="contact no"><span id="mob_error" class="error">enter mob
+                no</span><br>
+
+            <label for="Create password">Create password</label><br>
+            <input type="password" id="password" placeholder="create password"><span id="pass_error" class="error">pass
+                must be greater than 6</span><br>
+
+            <label for="Confirm password">Confirm password</label><br>
+            <input type="password" id="confirm_password" placeholder="Confirm password"><span id="confirm_error"
+                class="error">Pass are not same</span><br>
+
+            <button type="button" class="btn btn-primary" onclick="validateForm()">Register</button><br>
+
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var first = document.forms['myform']['fname'].value;
+            var last = document.forms['myform']['lname'].value;
+            var email = document.forms['myform']['email'].value;
+            var city = document.forms['myform']['city'].value;
+            var contact = document.forms['myform']['contact'].value;
+            var password = document.forms['myform']['password'].value;
+            var confirm_password = document.forms['myform']['confirm_password'].value;
+            error = false;
+
+
+            if (first == "") {
+                document.getElementById('f_error').style.display = 'block';
+                error = true;
+
+            }
+            if (last == "") {
+                document.getElementById('l_error').style.display = 'block';
+                error = true;
+            }
+            function select() {
+                document.getElementById("city").value;
+                document.getElementById("c_error").style.display = 'block';
+                error = true;
+            }
+
+            if (contact.length != 10 || isNaN(contact)) {
+                document.getElementById('mob_error').style.display = 'block';
+                error = true;
+            }
+            if (password == "") {
+                document.getElementById("pass_error").innerHTML = "plz fill the password";
+                error = true;
+
+            }
+            if (password.length < 6) {
+
+                document.getElementById('pass_error').style.display = 'inline-block';
+                error = true;
+            }
+
+            if (password != confirm_password) {
+                document.getElementById('confirm_error').innerHTML.style.display = 'inline-block';
+                error = true;
+                alert("not same");
+            }
+
+
+            if (error) {
+                return false;
+            }
+
+
+        }
+
+    </script>
+</body>
+
+</html>

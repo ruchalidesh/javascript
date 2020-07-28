@@ -1,0 +1,215 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <title>Foobler</title>
+
+  <!-- Required meta tags -->
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
+  <style>
+    body {
+
+      padding: 0px;
+
+    }
+
+    .image {
+
+      padding: 0px;
+
+      overflow-x: hidden;
+
+      overflow-y: hidden;
+
+    }
+
+    img {
+
+      transition-duration: 1s;
+
+      width: 100%;
+
+    }
+
+    img:hover {
+
+      opacity: 0.5;
+
+      -ms-transform: scale(1.2);
+      /* IE 9 */
+
+      transform: scale(1.2);
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="text-center alert alert-primary alertdiv mt-3" id="imagesloading" role="alert">
+
+      Loading Data
+
+    </div>
+
+    <div class="row" id="photosContainer">
+
+    </div>
+
+    <!-- All posts goes here -->
+
+  </div>
+
+
+
+
+
+  <!-- The Modal -->
+
+  <div class="modal fade" id="myModal">
+
+    <div class="modal-dialog">
+
+      <button type="button" class="close" data-dismiss="myModal">&times;</button>
+
+      <img src="" id="modalImage"></img>
+
+    </div>
+
+  </div>
+
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script>
+
+    //varible to store images
+
+    var allImages = [];
+
+    //show modal for image
+
+    function showModal(id) {
+
+      //set image in modal
+
+      document.getElementById('modalImage').src = allImages[Number(id) - 1].url;
+
+      //show modal
+
+      $('#myModal').modal('show');
+
+    }
+
+    //fetch images
+
+    fetch('https://jsonplaceholder.typicode.com/photos')
+
+      .then(response =>
+
+
+
+        response.json()
+
+
+
+      )
+
+      .then(photos => {
+
+        //store all photos in variable
+
+        allImages = photos;
+
+        //hide loading
+
+        document.getElementById('imagesloading').style.display = 'none';
+
+        //for loop to images
+
+        for (let index = 0; index < 100; index++) {
+
+          //create template 
+
+          var image = `
+
+                  <div onclick="showModal('${ allImages[index].id}')" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 image animate__animated animate__zoomIn animate__delay-0.5s">
+
+                    <img src="${ allImages[index].thumbnailUrl}" alt="image">
+
+                    </div>
+
+                  `;
+
+          //append template
+
+          document.getElementById('photosContainer').innerHTML += image;
+
+
+
+
+
+        }
+
+        // photos.forEach((photo) => {
+
+        //     if(photo.id < 100){
+
+        //       var image = `
+
+        //       <div onclick="showModal('${photo.id}')" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 image animate__animated animate__zoomIn animate__delay-0.5s">
+
+        //         <img src="${photo.thumbnailUrl}" alt="image">
+
+        //         </div>
+
+        //       `;
+
+        //     document.getElementById('photosContainer').innerHTML += image; 
+
+        //     }
+
+        // })
+
+      })
+
+  </script>
+
+</body>
+
+</html>
